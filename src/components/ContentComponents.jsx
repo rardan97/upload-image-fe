@@ -4,6 +4,9 @@ import { FaReact } from "react-icons/fa";
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { MdBookmarkAdd } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 const ContentComponents = () => {
  
@@ -235,67 +238,33 @@ const ContentComponents = () => {
                         <h4>User</h4>
                         <hr />
                     </div>
-                    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-4">
+                    <div className="container d-flex justify-content-center align-items-center">
+             {/* ==================== */}
+                
+{/* ===================== */}
+                </div>
+           
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-4">
                     <div className="col">
                         <div className="card h-100">
                         <img src="/public/ironman.jpg" className="card-img-top" alt="..."/>
                         <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <h5 className="card-title">Iron Man</h5>
+                            <p className="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+                            <p className="card-text"><MdEmail /> email@gmail.com</p>
+                            <p className="card-text"><FaPhoneAlt /> +62812345678</p>
+                            <p className="card-text"> <FaMapMarkerAlt /> Indonesia</p>
+                          
+                            
                         </div>
                         <div className="card-footer">
-                            <small className="text-body-secondary">Last updated 3 mins ago</small>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="card h-100">
-                        <img src="/public/ironman.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div className="card-footer">
-                            <small className="text-body-secondary">Last updated 3 mins ago</small>
-                        </div>
+                           <button className='btn btn-sm btn-outline-primary rounded px-2'  data-bs-toggle="modal" data-bs-target="#exampleModal"><MdModeEditOutline size={20} style={{ color: "#0A5EB0", border: "none" }}/> Edit </button>
+                           <button className='btn btn-sm btn-outline-danger mx-1 rounded' > <MdDelete size={20} style={{ color: "#D63447", border: "none" }}/> Delete</button>
+                           </div>
+                        
                         </div>
                     </div>
-                    <div className="col">
-                        <div className="card h-100">
-                        <img src="/public/ironman.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div className="card-footer">
-                            <small className="text-body-secondary">Last updated 3 mins ago</small>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="card h-100">
-                        <img src="/public/ironman.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div className="card-footer">
-                            <small className="text-body-secondary">Last updated 3 mins ago</small>
-                        </div>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <div className="card h-100">
-                        <img src="/public/ironman.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div className="card-footer">
-                            <small className="text-body-secondary">Last updated 3 mins ago</small>
-                        </div>
-                        </div>
-                    </div>
+                    
                 </div>
                     
                     <div className="row g-3 ">
