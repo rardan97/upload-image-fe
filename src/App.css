@@ -1,10 +1,7 @@
 body{
     background: rgb(7, 13, 37);
-    /* Untuk Safari 5.1 to 6.0 */
     background: -webkit-linear-gradient(bottom left, rgb(203, 5, 221), #00033D);
-    /* Untuk Internet Explorer 10 */
     background: -ms-linear-gradient(bottom left, rgb(211, 4, 142), rgb(5, 4, 71));
-    /* Standard syntax */
     background: linear-gradient(to top right, rgb(44, 4, 71), rgb(5, 4, 71));
 }
 
@@ -12,102 +9,81 @@ body{
     min-height: 1000px;
 }
 
-/* .text-well {
-    -webkit-text-stroke: 2px #fff;
-  } */
-
-
-
-  .text-z {
+.text-z {
     color: rgb(0, 14, 206);
     filter: drop-shadow(3px 0 0 rgb(209, 217, 228)) 
     drop-shadow(0 3px 0 rgb(197, 206, 255)) 
     drop-shadow(-3px 0 0 rgb(197, 206, 255)) 
     drop-shadow(0 -3px 0 rgb(197, 206, 255)) 
-  }
-
-
+}
 
 .orbitron-title {
     font-family: "Orbitron", serif;
     font-optical-sizing: auto;
     font-weight: 800;
     font-style: normal;
-  }
+}
 
-  .orbitron-text {
+.orbitron-text {
     font-family: "Orbitron", serif;
     font-optical-sizing: auto;
     font-weight: 100;
     font-style: normal;
-  }
+}
 
-  .headerbg{
+.headerbg{
     background-color: #00033D;
     height: 400px; 
     z-index: 99999;
-  }
+}
 
-  .header {
+.header {
     background-image: url('/bg6.jpg');
-    background-size: cover; /* Ensures the image covers the entire header */
-    /* background-position: center; */
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 400px; /* Set a fixed height or any height you need */
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Text color */
+    color: white;
     text-align: center;
-  }
-
-  .cardbg{
-    background: rgb(8, 45, 194);
-    /* Untuk Safari 5.1 to 6.0 */
-    background: -webkit-linear-gradient(bottom left, rgb(203, 5, 221), #030cbb);
-    /* Untuk Internet Explorer 10 */
-    background: -ms-linear-gradient(bottom left, rgb(211, 4, 142), rgb(10, 6, 228));
-    /* Standard syntax */
-    background: linear-gradient(to top right, rgb(44, 4, 71), rgb(17, 14, 146));
-  }
-
-  .card:hover{
-    transform: scale(1.05);
- box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
-  .formbg{
-   
+.cardbg{
+    background: rgb(8, 45, 194);
+    background: -webkit-linear-gradient(bottom left, rgb(203, 5, 221), #030cbb);
+    background: -ms-linear-gradient(bottom left, rgb(211, 4, 142), rgb(10, 6, 228));
+    background: linear-gradient(to top right, rgb(44, 4, 71), rgb(17, 14, 146));
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.formbg{
     background: rgb(5, 15, 53);
-    /* Untuk Safari 5.1 to 6.0 */
     background: -webkit-linear-gradient(bottom left, rgb(14, 4, 112), #00033D);
-    /* Untuk Internet Explorer 10 */
     background: -ms-linear-gradient(bottom left, rgb(4, 15, 78), rgb(27, 4, 71));
-    /* Standard syntax */
     background: linear-gradient(to top right, rgb(24, 6, 75), rgb(36, 5, 121));
-  }
+}
 
-  .transparent-element {
-    opacity: 0.8; /* Seluruh elemen memiliki 50% transparansi */
-  }
+.transparent-element {
+    opacity: 0.8;
+}
 
-  .formbgmodal {
+.formbgmodal {
     background: rgb(7, 13, 37, 0.8);
-    
-  }
+}
 
-
- 
- 
-
-  .hrx {
+.hrx {
     border: 2px solid #a307c2;  
     width: 90%;             
     margin: 20px auto;      
-  }
+}
 
-  .hrx1 {
+.hrx1 {
     border: 2px solid #308aff;  
     width: 100%;             
     margin: 20px auto;       
@@ -115,7 +91,4 @@ body{
     drop-shadow(0 3px 0 rgb(255, 255, 255)) 
     drop-shadow(-3px 0 0 rgb(197, 206, 255)) 
     /* drop-shadow(0 -3px 0 rgb(255, 255, 255))  */
-  }
-  
-  
-  
+}

@@ -1,22 +1,14 @@
 import axios from 'axios';
 
 const REST_API_BASE_URL = 'http://localhost:8080/api/user';
-
 export const listUser = () =>  axios.get(REST_API_BASE_URL+'/getListAll');
-
 export const getValueUserById = (userId) => axios.get(REST_API_BASE_URL + '/getValueById/' + userId);
-
-// Updated createuser to handle file uploads
 export const createUser = (user) => {
-    const formData = new FormData();  // Create FormData to handle file uploads
-    
-    // Append other user data (text fields) to FormData
+    const formData = new FormData();
     formData.append('userName', user.userName);
     formData.append('userDesc', user.userDesc);
-    
-    // Append the file image (if provided) to FormData
     if (user.userImage) {
-      formData.append('userImage', user.userImage);  // Ensure userImage is a File object
+      formData.append('userImage', user.userImage);
     }
   
     // Send the request with FormData
