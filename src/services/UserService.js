@@ -12,7 +12,7 @@ export const createUser = (user) => {
     
     // Append other user data (text fields) to FormData
     formData.append('userName', user.userName);
-    formData.append('userDesk', user.userDesk);
+    formData.append('userDesc', user.userDesc);
     
     // Append the file image (if provided) to FormData
     if (user.userImage) {

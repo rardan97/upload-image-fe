@@ -7,22 +7,22 @@ import { MdBookmarkAdd } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
 
 const ContentComponents = () => {
- 
-   
     const [isEditMode, setIsEditMode] = useState(false); 
     const [users, setUsers] = useState([]);
     const [userId, setUserId] = useState('');
     const [userName, setUserName] = useState('');
     const [userImage, setUserImage] = useState(null);
-    const [userDesk, setUserDesk] = useState('');
+    const [userImageOld, setUserImageOld] = useState(null);
+    const [userDesc, setUserDesc] = useState('');
     const [previewUrl, setPreviewUrl] = useState(null);
     const fileInputRef = useRef(null);
     const [errors, setErrors] = useState({
         userName:'',
         userImage:'',
-        userDesk:'',
+        userDesc:'',
         userStatus:'',
     });
     const modalRef = useRef(null);
@@ -33,9 +33,6 @@ const ContentComponents = () => {
         getAllUser();
 
     }, []);
-
-   
-    
 
     function getAllUser(){
         listUser().then((response) => {
@@ -50,18 +47,15 @@ const ContentComponents = () => {
         setUserName('');
         setUserImage(null);
         setPreviewUrl(null);
-        setUserDesk('');
-        
+        setUserDesc('');
         setErrors({});
-
         if (fileInputRef.current) {
             fileInputRef.current.value = '';  // Reset the file input
-          }
+        }
     }
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
-
         if (file && file.type.startsWith('image/')) {
             setUserImage(file);
             setPreviewUrl(URL.createObjectURL(file)); 
@@ -69,16 +63,11 @@ const ContentComponents = () => {
             setUserImage(null);
             setPreviewUrl(null); // Reset preview
             setErrors({ ...errors, userImage: 'Please select a valid image file.' })
-            
         }
     };
 
-    
-
-    
-
     function closeModal() {
-        const modal = document.getElementById('exampleModal'); // Pastikan modal memiliki ID yang benar
+        const modal = document.getElementById('exampleModal');
         if (modal) {
             const modalCloseButton = modal.querySelector('.btn-close');
             if (modalCloseButton) {
@@ -90,14 +79,13 @@ const ContentComponents = () => {
     }
 
    
-
-
-   
     const openAddModal = () => {
         setIsEditMode(false);
         clearInput();
 
     };
+
+    
 
 
     const openEditModal = (userData) => {
@@ -112,7 +100,7 @@ const ContentComponents = () => {
     function saveUser(e){
         e.preventDefault();
         if(validateForm()){
-            const userData = {userName, userImage, userDesk}
+            const userData = {userName, userImage, userDesc}
             createUser(userData).then((response) => {
                 console.log(response.data);
 
@@ -138,11 +126,11 @@ const ContentComponents = () => {
                 // Mengatur nilai produk di state
                 setUserId(user.userId);
                 setUserName(user.userName);
-                setUserDesk(user.userDesk);
+                setUserDesc(user.userDesc);
 
                 // Jika userImage ada, simpan URL untuk preview
                 if (user.userImage) {
-                    setPreviewUrl(`${user.userImage}`);
+                    setPreviewUrl(`http://localhost:8080/api/user/images/${user.userImage}`);
                     setUserImage(user.userImage);  // Simpan nama gambar di state untuk referensi
                 } else {
                     // setPreviewUrl(null);
@@ -160,12 +148,16 @@ const ContentComponents = () => {
             console.log("proccess11");
             const formData = new FormData();
             formData.append('userName', userName);
-            formData.append('userDesk', userDesk);
+            formData.append('userDesc', userDesc);
             formData.append('userId', userId);
             if (userImage && userImage instanceof File) {
+                console.log("file");
                 formData.append('userImage', userImage);
+                formData.append('userImageOld', null);
             } else if (userImage && typeof userImage === 'string') {
-                formData.append('userImage', userImage);
+                console.log("string");
+                formData.append('userImage', null);
+                formData.append('userImageOld', userImage);
             }
 
             console.log(userId);
@@ -208,10 +200,10 @@ const ContentComponents = () => {
             valid = false;
           }
 
-        if(userDesk.trim()){
-            errorsCopy.userDesk = '';
+        if(userDesc.trim()){
+            errorsCopy.userDesc = '';
         }else{
-            errorsCopy.userDesk = 'userDesk is required';
+            errorsCopy.userDesc = 'userDesc is required';
             valid = false;
         }
 
@@ -219,98 +211,57 @@ const ContentComponents = () => {
         return valid;
     }
 
-
-
-
-
   return (
     <div>
-        <div className='container-fluid rowx'>
+        <div className='container rowx'>
             <div className='row'>
             
                 
                 <div className='col-sm-12'>
                     
                     <div className='d-flex flex-row-reverse mt-3'>
-                        <button className='btn btn-sm btn-success mx-4' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={openAddModal}><MdBookmarkAdd size={25} style={{ color: "white", border: "none" }}/> Add Menu</button>
+                        <button className='btn btn-sm btn-outline-success px-4' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={openAddModal}><IoMdAdd size={25} style={{ color: "#00a816", border: "none" }}/> <span className="orbitron-text">Add</span></button>
                     </div>
-                    <div className=''>
-                        <h4>User</h4>
-                        <hr />
-                    </div>
-                    <div className="container d-flex justify-content-center align-items-center">
-             {/* ==================== */}
-                
-{/* ===================== */}
-                </div>
-           
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-4">
-                    <div className="col">
-                        <div className="card h-100">
-                        <img src="/public/ironman.jpg" className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">Iron Man</h5>
-                            <p className="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
-                            <p className="card-text"><MdEmail /> email@gmail.com</p>
-                            <p className="card-text"><FaPhoneAlt /> +62812345678</p>
-                            <p className="card-text"> <FaMapMarkerAlt /> Indonesia</p>
-                          
-                            
-                        </div>
-                        <div className="card-footer">
-                           <button className='btn btn-sm btn-outline-primary rounded px-2'  data-bs-toggle="modal" data-bs-target="#exampleModal"><MdModeEditOutline size={20} style={{ color: "#0A5EB0", border: "none" }}/> Edit </button>
-                           <button className='btn btn-sm btn-outline-danger mx-1 rounded' > <MdDelete size={20} style={{ color: "#D63447", border: "none" }}/> Delete</button>
-                           </div>
-                        
-                        </div>
-                    </div>
-                    
-                </div>
-                    
+                    <hr className="hrx1"/>
                     <div className="row g-3 ">
                     {
                         users.map(user =>
-                            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 col-xxl-2" key={user.userId}>
-                                <div className="card shadow-lg mb-4 rounded border-0">
+                            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 col-xxl-3" key={user.userId}>
+                                <div className="card shadow-lg mb-4 border-primary rounded mb-2 cardbg">
                                 <img 
                                     src={user.userImage} 
                                     className="card-img-top" 
                                     alt="..."
                                     style={{
-                                        height: "160px", // Mengatur tinggi
-                                        objectFit: "cover", // Opsional: Mengontrol proporsi
+                                        height: "280px", 
+                                        objectFit: "cover", 
                                       }}
                                 />
                                 <div className="card-body text-center" >
-                                    <h4 style={{ color: "#D63447"}} className='card-title'>{user.userName}</h4>
-                                    {/* <p className="fst-italic lh-sm">{user.userDesk}</p> */}
+                                    <h4 className='card-title text-white orbitron-title '>{user.userName}</h4>
+                                    <p className="text-white orbitron-text">{user.userDesc}</p>
                                     <br />
-                                    <hr />
-                                    <button className='btn btn-sm btn-outline-primary rounded px-2' onClick={() => openEditModal(user.userId)} data-bs-toggle="modal" data-bs-target="#exampleModal"><MdModeEditOutline size={20} style={{ color: "#0A5EB0", border: "none" }}/> Edit </button>
-                                    <button className='btn btn-sm btn-outline-danger mx-1 rounded' onClick={() => delUser(user.userId)}> <MdDelete size={20} style={{ color: "#D63447", border: "none" }}/> Delete</button>
+                                    <hr className="hrx"/>
+                                    <button className='btn btn-sm btn-outline-primary rounded px-4 ' onClick={() => openEditModal(user.userId)} data-bs-toggle="modal" data-bs-target="#exampleModal"><MdModeEditOutline size={20} style={{ color: "#0A5EB0", border: "none" }}/> <span className="orbitron-text">Edit</span> </button>
+                                    <button className='btn btn-sm btn-outline-danger mx-1 rounded px-4' onClick={() => delUser(user.userId)}> <MdDelete size={20} style={{ color: "#D63447", border: "none" }}/> <span className="orbitron-text">Delete</span></button>
                                 </div>
                                 </div>
-                            </div>
+                            </div>                                                                                             
                         )
                     }
                     </div>
-                  
-                    
-                    
-                    <br />
-                    <br />
                 </div>
             </div>
         </div>
 
         
 
-        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref={modalRef}>
-            <div className="modal-dialog">
-                <div className="modal-content">
+        <div className="modal fade formbgmodal" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref={modalRef}>
+            <div className="modal-dialog transparent-element">
+                <div className="modal-content formbg text-white border-primary ">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="exampleModalLabel"> {isEditMode ? 'Edit Menu' : 'Tambah Menu'}</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={closeModal}></button>
+                        <h1 className="modal-title fs-5 orbitron-title" id="exampleModalLabel"> {isEditMode ? 'Edit Menu' : 'Tambah Menu'}</h1>
+                        <button type="button" className="btn-close color-white" data-bs-dismiss="modal" aria-label="Close" onClick={closeModal}></button>
                     </div>
                     <div className="modal-body">
                         <form>
@@ -320,26 +271,29 @@ const ContentComponents = () => {
                                 value={userId}
                             />
                             <div className="mb-3">
-                                <label htmlFor="exampleInputEmail1" className="form-label">userName</label>
+                                <label htmlFor="exampleInputEmail1 " className="form-label orbitron-text">User Name</label>
                                 <input 
                                     type="text" 
                                     name='userName'
                                     value={userName}
-                                    className={`form-control ${errors.userName ? 'is-invalid':''}`}
+                                    className={`form-control orbitron-text ${errors.userName ? 'is-invalid':''}`}
                                     onChange={(e) => setUserName(e.target.value)} 
                                 />
                                 {errors.userName && <div className='invalid-feedback'>{errors.userName}</div>}
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="exampleInputEmail1" className="form-label">userImage</label>
+                                <label htmlFor="exampleInputEmail1" className="form-label orbitron-text">User Image</label>
                                 <input 
                                     type="file" 
                                     name='userImage'
-                                    className={`form-control ${errors.userImage ? 'is-invalid':''}`}
+                                    className={`form-control orbitron-text ${errors.userImage ? 'is-invalid':''}`}
                                     onChange={handleImageChange}
                                     accept="image/*"
                                     ref={fileInputRef} 
                                 />
+
+                                
+                                    
 
                                 {userImage && (
                                 <div className='my-2'>
@@ -354,22 +308,21 @@ const ContentComponents = () => {
                                 {errors.userImage && <div className='invalid-feedback'>{errors.userImage}</div>}
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="exampleInputEmail1" className="form-label">userDesk</label>
+                                <label htmlFor="exampleInputEmail1" className="form-label orbitron-text">User Desc</label>
                                 <input 
                                     type="text" 
-                                    name='userDesk'
-                                    value={userDesk}
-                                    className={`form-control ${errors.userDesk ? 'is-invalid':''}`}
-                                    onChange={(e) => setUserDesk(e.target.value)} 
+                                    name='userDesc'
+                                    value={userDesc}
+                                    className={`form-control orbitron-text ${errors.userDesc ? 'is-invalid':''}`}
+                                    onChange={(e) => setUserDesc(e.target.value)} 
                                 />
-                                {errors.userDesk && <div className='invalid-feedback'>{errors.userDesk}</div>}
+                                {errors.userDesc && <div className='invalid-feedback'>{errors.userDesc}</div>}
                             </div>
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button className="btn btn-sm btn-primary" onClick={saveUser}>Save</button>
-                        <button className="btn btn-sm btn-primary" onClick={updateProccessUser}>Update</button>
+                        <button type="button" className="btn btn-sm btn-outline-secondary px-4" data-bs-dismiss="modal"><span className="orbitron-text"> Close</span> </button>
+                        <button type="submit" className="btn btn-sm btn-outline-primary rounded px-4" onClick={isEditMode ? updateProccessUser : saveUser}><span className="orbitron-text">{isEditMode ? 'Update' : 'Submit'}</span></button>
                         
                     </div>
                 </div>

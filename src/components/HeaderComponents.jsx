@@ -3,11 +3,15 @@ import React from 'react'
 const HeaderComponents = () => {
   return (
     <>
-       <header className="pb-3 mb-4 border-bottom">
-      <a href="/" className="d-flex align-items-center text-body-emphasis text-decoration-none">
-        <h1>Header</h1>
-      </a>
-    </header>
+        <div className='headerbg'>
+        <header className="header">
+          <h1 className='orbitron-title text-z'>WELCOME TO MY SITE</h1>
+          
+          {/* <h1 className="typing-text">Hello, I am typing effect in React!</h1> */}
+       
+        </header>
+        </div>
+       
 
     </>
   )
