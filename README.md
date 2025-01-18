@@ -6,7 +6,7 @@
 - bootstrap
 - react-icon
 
-## run project
+## Run Project
 
 1. clone project React JS - Upload Image FE
    Open your terminal and run the following command to clone the frontend project:
@@ -36,10 +36,10 @@ This will start the development server and you can access the application in you
 http://localhost:5173
 ```
 
-# BackEnd
+# Backend Project
 
 The BackEnd of this application can be accessed at the following link:
 
 ```
-https://github.com/rardan97/upload-image-be.git
+https://github.com/rardan97/upload-image-be
 ```
